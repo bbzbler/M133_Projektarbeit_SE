@@ -11,9 +11,37 @@
 <body>
     <h1 class="text-center">Stundenplan GIBM</h1>
     <h5>Berufsgruppen</h5>
+    
     <select id="Berufsgruppen"></select>
     <h5>Klassenauswahl</h5>
     <select id="Klassenauswahl"></select>
+    <div id="ZeitFenster">
+        <div id="Wochenregler">
+            <button id="left">
+        &larr;<!--left arrow--></button>
+            <button id="date" ></button>
+            <button id="right">&rarr;<!--right arrow--></button><br>
+        </div>
+        <div id="content">
+            <table id="contentHeader">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Wochentag</th>
+                        <th>Von</th>
+                        <th>Bis</th>
+                        <th>Lehrer</th>
+                        <th>Fach</th>
+                        <th>Raum</th>
+                    </tr>
+                </thead>
+                <tbody id="contentBody">
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
     <script src="project.js">
     </script>
 </body>
