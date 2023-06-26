@@ -120,6 +120,16 @@ Date.prototype.substractWeek = function() {
     //eine woche vorher
     this.setDate(this.getDate() - 7);
 }
+$("#left").on("click",e => {
+    e.preventDefault();
+    date.substractWeek();
+    updateTable();
+})
+$("#right").on("click",e => {
+    e.preventDefault();
+    date.addWeek();
+    updateTable();
+})
 
 const myDatePicker = MCDatepicker.create({
     el: '#date',
