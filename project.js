@@ -5,10 +5,9 @@ $(document).ready(setupContent);
 
 function setupContent()
 {
-    $("#date").text((date.getWeek()) + "-" + date.getYear());
+    $("#date").text((date.getWeek()) + "-" + date.getFullYear());
     getData();
-    //TODO: set week and year in timetable
-    //TODO: get async data 
+    
 }
 
 function getData()
@@ -16,9 +15,11 @@ function getData()
     $.getJSON("https://sandbox.gibm.ch/berufe.php").done(data => {
     if(data.length > 0)
     {
-        //TODO: populate jobs
-        //TODO: get items from localstorage if avaiable 
-        appendOptions(data);
+       
+        appendOptions(data); 
+        if (localStorage.getItem("Beruf") != null) {
+            $("#Beruf").val(localStorage.getItem("Beruf"));
+        }
     }
     }).fail(function()
     {
@@ -30,6 +31,7 @@ function appendOptions(data) {
     $.each(data, function(_key, value) {
         $("#Berufsgruppen").append(new Option(value.beruf_name, value.beruf_id));
     });
+    loadClasses($("#Berufsgruppen").find(":selected").val());
 }
 
 
@@ -94,6 +96,7 @@ function checkLocalStorageForClassID() {
     }
 }
 
+
 function loadTimeTable(classId) {
     $("#contentBody").children().remove();
     if (classId != 0) {
@@ -113,6 +116,17 @@ function getTimeTable(classId) {
         }
 
     );
+}
+function appendTimeTable(data) {
+    //for each row
+    $.each(data, function(_key, value) {
+        //apend row
+        $("#contentBody").append("<tr><th>" + value.tafel_datum + "</th><th>" + weekDays[value.tafel_wochentag - 1] +
+            "</th><th>" + value.tafel_von + "</th><th>" + value.tafel_bis + "</th><th>" + value.tafel_lehrer + "</th><th>" + value.tafel_longfach +
+            "</th><th>" + value.tafel_raum + "</th></tr>");
+    });
+    //show content
+    $("#content").fadeIn();
 }
 Date.prototype.getWeek = function() {
     //getting the weeks since the first day of the year
