@@ -38,11 +38,20 @@ function checkLocalStorage() {
         $("#Berufsgruppen").val(localStorage.getItem("Beruf"));
     }
 }
-$("#Klassenauswahl").on("change", () => {
+$("#Berufsgruppen").on("change", () => {
+    //Alle Berufe laden
     $("#ZeitFenster").fadeOut(function() {
         localStorage.clear();
         localStorage.setItem("Beruf", $("#Berufsgruppen").find(":selected").val());
         loadClasses($("#Berufsgruppen").find(":selected").val());
+    });
+});
+$("#Klassenauswahl").on("change", () => {
+    //Alle Klassen laden
+    $("#ZeitFenster").fadeOut(function() {
+        localStorage.clear();
+        localStorage.setItem("Klasse", $("#Klassenauswahl").find(":selected").val());
+        loadClasses($("#Klassenauswahl").find(":selected").val());
     });
 });
 
